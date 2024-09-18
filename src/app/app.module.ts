@@ -32,6 +32,9 @@ import { routes } from './app.routes'; // Import routing dari app.routes.ts
 import { ItemAddEditComponent } from './item/item-add-edit/item-add-edit.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { ItemDetailComponent } from './item/item-detail/item-detail.component';
+import { OrderListComponent } from './order/order-list/order-list.component';
+import { OrderAddEditComponent } from './order/order-add-edit/order-add-edit.component';
+import { OrderDetailComponent } from './order/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +45,9 @@ import { ItemDetailComponent } from './item/item-detail/item-detail.component';
     ItemListComponent,
     ItemAddEditComponent,
     ItemDetailComponent,
+    OrderListComponent,
+    OrderAddEditComponent,
+    OrderDetailComponent,
   ],
   imports: [
     BrowserModule,

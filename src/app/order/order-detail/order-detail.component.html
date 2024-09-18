@@ -1,0 +1,40 @@
+<div mat-dialog-title class="dialog-title">
+  <h1>Detail Order</h1>
+</div>
+
+<div mat-dialog-content class="dialog-content">
+  <table *ngIf="data" class="customer-details-table">
+    <tr>
+      <td><strong>ID:</strong></td>
+      <td>{{ data.orderId }}</td>
+    </tr>
+    <tr>
+      <td><strong>Code:</strong></td>
+      <td>{{ data.orderCode }}</td>
+    </tr>
+    <tr>
+      <td><strong>Customer Name:</strong></td>
+      <td>{{ data.customers.name }}</td>
+    </tr>
+    <tr>
+      <td><strong>Item Name:</strong></td>
+      <td>{{ data.item.name }}</td>
+    </tr>
+    <tr>
+      <td><strong>Quantity:</strong></td>
+      <td>{{ data.quantity }}</td>
+    </tr>
+    <tr>
+      <td><strong>Total Price:</strong></td>
+      <td>{{ data.totalPrice }}</td>
+    </tr>
+    <tr>
+      <td><strong>Order Date:</strong></td>
+      <td>{{ data.orderDate | date : "MM/dd/yyyy" }}</td>
+    </tr>
+  </table>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-raised-button color="accent">Close</button>
+</div>

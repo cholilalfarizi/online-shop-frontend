@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { CustomerListComponent } from './customer/customer-list/customer-list.component';
 import { ItemListComponent } from './item/item-list/item-list.component';
+import { OrderListComponent } from './order/order-list/order-list.component';
 export const routes: Routes = [
   {
     path: '',
@@ -17,9 +18,9 @@ export const routes: Routes = [
     component: ItemListComponent,
     pathMatch: 'full',
   },
-  //   {
-  //     path: 'order',
-  //     component: OrderComponent,
-  //     pathMatch: 'full',
-  //   },
+  {
+    path: 'order',
+    component: OrderListComponent,
+    pathMatch: 'full',
+  },
 ];
