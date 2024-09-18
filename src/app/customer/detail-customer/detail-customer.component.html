@@ -1,0 +1,43 @@
+<div mat-dialog-title class="dialog-title">
+  <h1>Detail Customer</h1>
+</div>
+
+<div mat-dialog-content class="dialog-content">
+  <div *ngIf="data?.pic" class="profile-pic">
+    <img [src]="data?.pic" alt="Profile Picture" />
+  </div>
+  <table *ngIf="data" class="customer-details-table">
+    <tr>
+      <td><strong>ID:</strong></td>
+      <td>{{ data.id }}</td>
+    </tr>
+    <tr>
+      <td><strong>Name:</strong></td>
+      <td>{{ data.name }}</td>
+    </tr>
+    <tr>
+      <td><strong>Address:</strong></td>
+      <td>{{ data.address }}</td>
+    </tr>
+    <tr>
+      <td><strong>Code:</strong></td>
+      <td>{{ data.code }}</td>
+    </tr>
+    <tr>
+      <td><strong>Phone:</strong></td>
+      <td>{{ data.phone }}</td>
+    </tr>
+    <tr>
+      <td><strong>Active:</strong></td>
+      <td>{{ data.isActive ? "Yes" : "No" }}</td>
+    </tr>
+    <tr>
+      <td><strong>Last Order Date:</strong></td>
+      <td>{{ data.lastOrderDate | date : "MM/dd/yyyy" }}</td>
+    </tr>
+  </table>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-raised-button color="accent">Close</button>
+</div>

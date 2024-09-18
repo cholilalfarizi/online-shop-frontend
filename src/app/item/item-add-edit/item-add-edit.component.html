@@ -1,0 +1,41 @@
+<div mat-dialog-title>
+  <h1>Add Item</h1>
+</div>
+
+<form [formGroup]="itemForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="name" formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Code</mat-label>
+        <input matInput placeholder="code" formControlName="code" />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field appearance="fill">
+        <mat-label>stock</mat-label>
+        <input matInput placeholder="stock" formControlName="stock" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>price</mat-label>
+        <input matInput placeholder="price" formControlName="price" />
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-radio-group formControlName="isAvailable">
+        <mat-radio-button value="true">Available</mat-radio-button>
+        <mat-radio-button value="false">Not Available</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+
+  <div mat-dialog-actions class="action">
+    <button mat-raised-button color="primary" type="submit">
+      {{ data ? "Update" : "Save" }}
+    </button>
+    <button mat-raised-button color="accent">Cancel</button>
+  </div>
+</form>

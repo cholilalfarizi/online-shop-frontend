@@ -1,0 +1,40 @@
+<div mat-dialog-title class="dialog-title">
+  <h1>Detail Item</h1>
+</div>
+
+<div mat-dialog-content class="dialog-content">
+  <table *ngIf="data" class="customer-details-table">
+    <tr>
+      <td><strong>ID:</strong></td>
+      <td>{{ data.id }}</td>
+    </tr>
+    <tr>
+      <td><strong>Name:</strong></td>
+      <td>{{ data.name }}</td>
+    </tr>
+    <tr>
+      <td><strong>Code:</strong></td>
+      <td>{{ data.code }}</td>
+    </tr>
+    <tr>
+      <td><strong>Stock:</strong></td>
+      <td>{{ data.stock }}</td>
+    </tr>
+    <tr>
+      <td><strong>Price:</strong></td>
+      <td>{{ data.price }}</td>
+    </tr>
+    <tr>
+      <td><strong>Status:</strong></td>
+      <td>{{ data.isAvailable ? "Available" : "Not Available" }}</td>
+    </tr>
+    <tr>
+      <td><strong>Last Rectock:</strong></td>
+      <td>{{ data.lastReStock | date : "MM/dd/yyyy" }}</td>
+    </tr>
+  </table>
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-raised-button color="accent">Close</button>
+</div>
