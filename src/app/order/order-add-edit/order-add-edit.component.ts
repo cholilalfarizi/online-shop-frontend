@@ -3,6 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrderServiceService } from '../order-service.service';
 import { DialogRef } from '@angular/cdk/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CustomerListService } from '../../customer/customer-list/customer-list.service';
+import { ItemServiceService } from '../../item/item-service.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-order-add-edit',
@@ -11,10 +14,14 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class OrderAddEditComponent {
   orderForm: FormGroup;
+  masterCustomers: any[] = [];
+  masterItems: any[] = [];
 
   constructor(
     private _fb: FormBuilder,
     private orderService: OrderServiceService,
+    private customerService: CustomerListService,
+    private itemService: ItemServiceService,
     private _dialogRef: DialogRef<OrderAddEditComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -27,6 +34,8 @@ export class OrderAddEditComponent {
   }
 
   ngOnInit(): void {
+    this.loadCustomers();
+    this.loadItems();
     if (this.data) {
       this.orderForm.patchValue({
         orderCode: this.data.orderCode,
@@ -37,6 +46,19 @@ export class OrderAddEditComponent {
     }
   }
 
+  loadCustomers(): void {
+    this.customerService.masterCustomer().subscribe((response: any) => {
+      this.masterCustomers = response.data;
+    });
+  }
+
+  loadItems(): void {
+    this.itemService.masterItems().subscribe((response: any) => {
+      console.log(response.data);
+      this.masterItems = response.data;
+    });
+  }
+
   onFormSubmit() {
     if (this.orderForm.valid) {
       const orderData = {
@@ -45,9 +67,10 @@ export class OrderAddEditComponent {
         customerId: this.orderForm.get('customerId')?.value || '',
         itemId: this.orderForm.get('itemId')?.value || '',
       };
+      console.log(this.data);
 
       if (this.data) {
-        this.orderService.editOrder(this.data.id, orderData).subscribe({
+        this.orderService.editOrder(this.data.orderId, orderData).subscribe({
           next: (val: any) => {
             alert('Order updated successfully');
             this._dialogRef.close();
@@ -68,5 +91,9 @@ export class OrderAddEditComponent {
         });
       }
     }
+  }
+
+  closeDialog(): void {
+    this._dialogRef.close();
   }
 }

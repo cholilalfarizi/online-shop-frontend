@@ -8,20 +8,34 @@
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
         <input matInput placeholder="name" formControlName="name" />
+        <mat-error *ngIf="empForm.get('name')?.hasError('required')">
+          Name is required
+        </mat-error>
+        <mat-error *ngIf="empForm.get('name')?.hasError('maxlength')">
+          Name must be max 100 characters long
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Address</mat-label>
         <input matInput placeholder="address" formControlName="address" />
+        <mat-error *ngIf="empForm.get('address')?.hasError('required')">
+          Address is required
+        </mat-error>
+        <mat-error *ngIf="empForm.get('address')?.hasError('maxlength')">
+          Address must be max 255 characters long
+        </mat-error>
       </mat-form-field>
     </div>
     <div class="row">
       <mat-form-field appearance="fill">
-        <mat-label>Code</mat-label>
-        <input matInput placeholder="CUST0XX" formControlName="code" />
-      </mat-form-field>
-      <mat-form-field appearance="fill">
         <mat-label>Phone</mat-label>
         <input matInput placeholder="08xxxxxxx" formControlName="phone" />
+        <mat-error *ngIf="empForm.get('phone')?.hasError('required')">
+          Phone number is required
+        </mat-error>
+        <mat-error *ngIf="empForm.get('phone')?.hasError('pattern')">
+          Incorrect format and phone number must be between 9 to 12 digits
+        </mat-error>
       </mat-form-field>
     </div>
 

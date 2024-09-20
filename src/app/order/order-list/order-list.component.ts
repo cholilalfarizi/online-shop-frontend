@@ -54,7 +54,6 @@ export class OrderListComponent implements OnInit {
     }
   }
 
-  // Move to the previous page
   prevPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -62,22 +61,19 @@ export class OrderListComponent implements OnInit {
     }
   }
 
-  // Generate array of page numbers for pagination buttons
   pageNumbers() {
     let totalPages = Math.ceil(this.totalData / this.pageSize);
     return Array.from({ length: totalPages }, (v, i) => i + 1);
   }
 
-  // Change the current page when a page number is clicked
   changePage(pageNumber: number) {
     this.currentPage = pageNumber;
     this.getOrder();
   }
 
-  // Change page size when a new size is selected
   changePageSize(pageSize: any) {
     this.pageSize = pageSize;
-    this.currentPage = 1; // Reset to the first page
+    this.currentPage = 1;
     this.getOrder();
   }
 
@@ -85,7 +81,6 @@ export class OrderListComponent implements OnInit {
     this.dialog.open(OrderAddEditComponent);
   }
 
-  // Open the edit form for a specific customer
   openEditForm(data: any) {
     const dialogRef = this.dialog.open(OrderAddEditComponent, {
       data,
@@ -98,6 +93,42 @@ export class OrderListComponent implements OnInit {
         }
       },
     });
+  }
+
+  downloadReport() {
+    this.orderService
+      .downloadReport(this.currentPage, this.pageSize, this.keyword)
+      .subscribe({
+        next: (response) => {
+          const blob = response.body;
+
+          // Check if blob is not null before proceeding
+          if (blob) {
+            const contentDisposition = response.headers.get(
+              'Content-Disposition'
+            );
+
+            // Extract filename from the contentDisposition header if it exists
+            const filename = contentDisposition
+              ? contentDisposition.split('filename=')[1].replace(/"/g, '')
+              : 'Order_Report.pdf'; // Default filename if not found
+            console.log('Content-Disposition header:', contentDisposition);
+
+            // Create a URL for the Blob and trigger download
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename; // Use the filename from the server
+            a.click();
+            window.URL.revokeObjectURL(url); // Clean up
+          } else {
+            console.error('Failed to download the report: Blob is null');
+          }
+        },
+        error: (err) => {
+          console.error('Error downloading the report:', err);
+        },
+      });
   }
 
   deleteOrder(id: number) {

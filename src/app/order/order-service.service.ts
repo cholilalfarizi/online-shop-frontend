@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -36,5 +36,22 @@ export class OrderServiceService {
 
   editOrder(id: number, data: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}`, data);
+  }
+
+  downloadReport(
+    currentPage: number,
+    pageSize: number,
+    keyword: string
+  ): Observable<HttpResponse<Blob>> {
+    let params = new HttpParams()
+      .set('pageNumber', currentPage)
+      .set('pageSize', pageSize)
+      .set('keyword', keyword);
+
+    return this.http.get(`http://localhost:8080/api/report/pdf`, {
+      params: params,
+      observe: 'response',
+      responseType: 'blob',
+    });
   }
 }

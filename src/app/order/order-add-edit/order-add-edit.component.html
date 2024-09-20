@@ -6,16 +6,35 @@
   <div mat-dialog-content class="content">
     <div class="row">
       <mat-form-field appearance="fill">
-        <mat-label>Customer Id</mat-label>
+        <mat-label>Customer</mat-label>
         <input
           matInput
-          placeholder="Customer Id"
+          placeholder="Select Customer"
+          [matAutocomplete]="autoCustomer"
           formControlName="customerId"
         />
+        <mat-autocomplete #autoCustomer="matAutocomplete">
+          <mat-option
+            *ngFor="let customer of masterCustomers"
+            [value]="customer.id"
+          >
+            {{ customer.id }} - {{ customer.name }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Item Id</mat-label>
-        <input matInput placeholder="Item Id" formControlName="itemId" />
+        <input
+          matInput
+          placeholder="Select Item"
+          [matAutocomplete]="autoItem"
+          formControlName="itemId"
+        />
+        <mat-autocomplete #autoItem="matAutocomplete">
+          <mat-option *ngFor="let item of masterItems" [value]="item.id">
+            {{ item.name }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
     </div>
     <div class="row">
@@ -34,6 +53,8 @@
     <button mat-raised-button color="primary" type="submit">
       {{ data ? "Update" : "Save" }}
     </button>
-    <button mat-raised-button color="accent">Cancel</button>
+    <button mat-raised-button color="accent" (click)="closeDialog()">
+      Cancel
+    </button>
   </div>
 </form>

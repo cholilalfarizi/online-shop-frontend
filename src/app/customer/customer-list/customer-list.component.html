@@ -6,7 +6,7 @@
         placeholder="Search"
         class="border p-2 rounded-lg"
         [(ngModel)]="name"
-        (keyup)="filterData()"
+        (keyup.enter)="filterData()"
       />
       <select
         class="border p-2 rounded-lg"
@@ -27,7 +27,6 @@
     <thead>
       <tr>
         <th class="p-3 text-left bg-gray-200">No</th>
-        <th class="p-3 text-left bg-gray-200">Id</th>
         <th class="p-3 text-left bg-gray-200">Name</th>
         <th class="p-3 text-left bg-gray-200">Status</th>
         <th class="p-3 text-left bg-gray-200">Code</th>
@@ -39,7 +38,6 @@
     <tbody>
       <tr class="border-2" *ngFor="let customer of customers; let i = index">
         <td class="p-3 border-2">{{ i + 1 }}</td>
-        <td class="p-3 border-2">{{ customer.id }}</td>
         <td class="p-3 border-2">
           <div style="display: flex; align-items: center">
             <img

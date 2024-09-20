@@ -38,4 +38,8 @@ export class CustomerListService {
   editCustomer(id: number, data: FormData): Observable<any> {
     return this.http.put(`${this.baseUrl}/customer/${id}`, data);
   }
+
+  masterCustomer(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/customer/master`);
+  }
 }

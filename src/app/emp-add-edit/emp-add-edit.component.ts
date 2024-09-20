@@ -22,6 +22,7 @@ import { DialogRef } from '@angular/cdk/dialog';
 export class EmpAddEditComponent {
   empForm: FormGroup;
   selectedFile: File | null = null;
+  phoneRegex: RegExp = /^(\\+62|62|0)8[1-9][0-9]{6,10}$/;
 
   constructor(
     private _fb: FormBuilder,
@@ -30,10 +31,9 @@ export class EmpAddEditComponent {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.empForm = this._fb.group({
-      name: ['', Validators.required],
-      address: ['', Validators.required],
-      code: ['', Validators.required],
-      phone: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(100)]],
+      address: ['', [Validators.required, Validators.maxLength(255)]],
+      phone: ['', [Validators.required, Validators.pattern(this.phoneRegex)]],
     });
   }
 
@@ -56,7 +56,6 @@ export class EmpAddEditComponent {
         const customerData = {
           name: this.empForm.get('name')?.value || '',
           address: this.empForm.get('address')?.value || '',
-          code: this.empForm.get('code')?.value || '',
           phone: this.empForm.get('phone')?.value || '',
         };
         formData.append(
@@ -83,7 +82,6 @@ export class EmpAddEditComponent {
         const customerData = {
           name: this.empForm.get('name')?.value || '',
           address: this.empForm.get('address')?.value || '',
-          code: this.empForm.get('code')?.value || '',
           phone: this.empForm.get('phone')?.value || '',
         };
         formData.append(

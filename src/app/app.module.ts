@@ -35,6 +35,7 @@ import { ItemDetailComponent } from './item/item-detail/item-detail.component';
 import { OrderListComponent } from './order/order-list/order-list.component';
 import { OrderAddEditComponent } from './order/order-add-edit/order-add-edit.component';
 import { OrderDetailComponent } from './order/order-detail/order-detail.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { OrderDetailComponent } from './order/order-detail/order-detail.componen
     CommonModule,
     FormsModule,
     MatRadioModule,
+    MatAutocompleteModule,
   ],
   providers: [
     provideHttpClient(withFetch()), // Provide HttpClient with fetch

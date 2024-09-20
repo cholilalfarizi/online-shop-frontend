@@ -58,7 +58,6 @@ export class CustomerListComponent implements OnInit {
     }
   }
 
-  // Move to the previous page
   prevPage() {
     if (this.currentPage > 1) {
       this.currentPage--;
@@ -66,31 +65,26 @@ export class CustomerListComponent implements OnInit {
     }
   }
 
-  // Generate array of page numbers for pagination buttons
   pageNumbers() {
     let totalPages = Math.ceil(this.totalData / this.pageSize);
     return Array.from({ length: totalPages }, (v, i) => i + 1);
   }
 
-  // Change the current page when a page number is clicked
   changePage(pageNumber: number) {
     this.currentPage = pageNumber;
     this.getCustomers();
   }
 
-  // Change page size when a new size is selected
   changePageSize(pageSize: any) {
     this.pageSize = pageSize;
-    this.currentPage = 1; // Reset to the first page
+    this.currentPage = 1;
     this.getCustomers();
   }
 
-  // Open the popup for adding/editing a customer
   openPopup() {
     this.dialog.open(EmpAddEditComponent);
   }
 
-  // Open the edit form for a specific customer
   openEditForm(data: any) {
     const dialogRef = this.dialog.open(EmpAddEditComponent, {
       data,
@@ -105,18 +99,16 @@ export class CustomerListComponent implements OnInit {
     });
   }
 
-  // Delete a customer
   deleteCustomer(id: number) {
     this.customerListService.deleteCustomer(id).subscribe({
       next: (res) => {
         alert('Customer deleted!');
-        this.getCustomers(); // Refresh the list after deletion
+        this.getCustomers();
       },
       error: console.log,
     });
   }
 
-  // Open the customer detail view
   detailCustomer(id: number) {
     this.dialog.open(DetailCustomerComponent, {
       data: id,

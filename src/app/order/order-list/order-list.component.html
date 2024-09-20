@@ -6,7 +6,7 @@
         placeholder="Search"
         class="border p-2 rounded-lg"
         [(ngModel)]="keyword"
-        (keyup)="filterData()"
+        (keyup.enter)="filterData()"
       />
       <select
         class="border p-2 rounded-lg"
@@ -18,16 +18,20 @@
         </option>
       </select>
     </div>
-    <button class="border p-2 rounded-lg" (click)="openAddForm()">
-      Add order
-    </button>
+    <div>
+      <button class="border p-2 rounded-lg" (click)="openAddForm()">
+        Add order
+      </button>
+      <button class="border p-2 rounded-lg" (click)="downloadReport()">
+        Download Report
+      </button>
+    </div>
   </div>
 
   <table class="w-full border-4">
     <thead>
       <tr>
         <th class="p-3 text-left bg-gray-200">No</th>
-        <th class="p-3 text-left bg-gray-200">Id</th>
         <th class="p-3 text-left bg-gray-200">Code</th>
         <th class="p-3 text-left bg-gray-200">Date</th>
         <th class="p-3 text-left bg-gray-200">Quantity</th>
@@ -40,7 +44,6 @@
     <tbody>
       <tr class="border-2" *ngFor="let order of orders; let i = index">
         <td class="p-3 border-2">{{ i + 1 }}</td>
-        <td class="p-3 border-2">{{ order.orderId }}</td>
         <td class="p-3 border-2">{{ order.orderCode }}</td>
         <td class="p-3 border-2">
           {{ order.orderDate | date : "MM/dd/yyyy" }}

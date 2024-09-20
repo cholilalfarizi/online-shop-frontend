@@ -37,4 +37,8 @@ export class ItemServiceService {
   editItem(id: number, data: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/${id}`, data);
   }
+
+  masterItems(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/master`);
+  }
 }
